@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-primary: #004d34;
+  --color-secondary-container: #f8b100;
+  --color-accent: #006747;
+  --color-background: #FCFBF9;
+  --color-on-background: #1a1c1b;
+  --color-surface-container-low: #f4f3f1;
+  
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-on-background font-sans;
+  }
+}
