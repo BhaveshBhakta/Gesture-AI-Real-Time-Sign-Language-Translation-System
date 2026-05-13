@@ -511,7 +511,7 @@ export default function App() {
            <p>
   Due to privacy constraints, <span className="font-bold text-gray-700"> the live feed is currently turned off.</span> 
  You can experience real-time detection by cloning the GitHub project and enabling it in your local environment.
-  <a href="YOUR_GITHUB_LINK" className="text-blue-600 hover:underline"> GitHub </a> 
+  <a href="https://github.com/BhaveshBhakta/Gesture-AI-Real-Time-Sign-Language-Translation-System.git" className="text-blue-600 hover:underline"> GitHub </a> 
   and run it locally.
 </p>
         </div>
