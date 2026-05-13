@@ -24,9 +24,8 @@ export default function App() {
   const [detectedSigns, setDetectedSigns] = useState("");
   const [isConnected, setIsConnected] = useState(true);
 
-  // Add this effect to fetch data from your backend
   useEffect(() => {
-    if (!showHub) return; // Don't fetch if the camera hub is closed
+    if (!showHub) return; 
 
     const fetchSentence = async () => {
       try {
@@ -158,7 +157,7 @@ export default function App() {
                 </motion.div>
               </section>
 
-              {/* Inclusion Section (Moved Up per user preference) */}
+              {/* Inclusion Section  */}
               <section className="bg-surface-container-low py-24 lg:py-32 border-b border-gray-100">
                 <div className="max-w-7xl mx-auto px-6 lg:px-12">
                   <div className="flex flex-col lg:flex-row gap-24">
@@ -406,160 +405,160 @@ export default function App() {
           </motion.div>
         ) : (
           <motion.div 
-  key="hub" 
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  exit={{ opacity: 0, scale: 0.95 }}
-  transition={{ duration: 0.4 }}
-  className="min-h-screen bg-gray-50 pt-32 pb-20"
->
-  <div className="max-w-7xl mx-auto px-6 lg:px-12">
-    <header className="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 text-left">
-      <div>
-        <div className="flex items-center gap-2 text-accent mb-4">
-          <Activity size={20} />
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Neural Pipeline Online</span>
-        </div>
-        <h1 className="text-3xl lg:text-5xl font-black text-primary tracking-tight">Sign To Text</h1>
-        <p className="text-gray-500 mt-2 font-medium">Real-time gesture analysis and semantic synthesis.</p>
-      </div>
-      <div className="flex gap-4">
-        <div className="flex items-center gap-3 bg-white px-6 py-3 rounded-full border border-gray-200 shadow-sm">
-          <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
-          <span className="text-sm font-bold text-gray-600 font-sans">
-            {isConnected ? "Connected to Server" : "Static Demo Mode"}
-          </span>
-        </div>
-      </div>
-    </header>
-
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 text-left">
-      {/* Video Feed Side */}
-      <div className="lg:col-span-7">
-        <div className="bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-2xl relative group">
-          <div className="aspect-video bg-gray-900 relative">
-            {/* Technical Overlays */}
-            <div className="absolute inset-0 pointer-events-none opacity-40 z-10">
-               <div className="absolute top-8 left-8 w-16 h-16 border-t-2 border-l-2 border-accent" />
-               <div className="absolute top-8 right-8 w-16 h-16 border-t-2 border-r-2 border-accent" />
-               <div className="absolute bottom-8 left-8 w-16 h-16 border-b-2 border-l-2 border-accent" />
-               <div className="absolute bottom-8 right-8 w-16 h-16 border-b-2 border-r-2 border-accent" />
-            </div>
-
-            {/* DEVELOPER INSTRUCTIONS:
-               To use your local Python backend:
-               1. Uncomment the <img src="http://localhost:5000..." /> block below.
-               2. Comment out the STATIC DEMO <img /> block below it.
-            */}
-
-            {/* --- LIVE FEED BLOCK (Uncomment to use locally) --- */}
-            {/* <img 
-              src={isConnected ? "http://localhost:5000/video_feed" : ""} 
-              className="w-full h-full object-cover" 
-              alt="Neural Feed" 
-              onError={() => setIsConnected(false)}
-            /> 
-            */}
-
-            {/* --- STATIC DEMO BLOCK (Comment this out when using Live Feed) --- */}
-            <img 
-              src="https://res.cloudinary.com/dsfkxbjrw/image/upload/f_auto,q_auto/v1778653379/example-live_t1engp.png"
-              className="w-full h-full object-cover grayscale brightness-75"
-              alt="Neural Feed Demo"
-            />
-
-            <div className="absolute top-4 left-5 z-20">
-              <div className="bg-red-500/90 backdrop-blur px-2 py-1 rounded-lg text-white font-bold text-xs uppercase tracking-widest flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-white animate-ping" />
-                Live Hub
-              </div>
-            </div>
-
-            <div className="absolute bottom-8 left-8 right-8 flex justify-between items-center z-20">
-              <div className="flex gap-2">
-                <button className="bg-white/10 backdrop-blur hover:bg-white/20 p-3 rounded-xl text-white transition-colors">
-                  <Maximize2 size={20} />
-                </button>
-              </div>
-              <div className="flex gap-4">
-                <div className="text-white/60 text-[10px] font-mono">FR: 60FPS</div>
-                <div className="text-white/60 text-[10px] font-mono">LAT: 0.12MS</div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="p-8 bg-primary">
-            <div className="flex flex-col sm:flex-row items-center justify-between text-white gap-6">
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-accent rounded-xl text-white">
-                  <Cpu size={24} />
-                </div>
-                <div className="text-left">
-                  <p className="text-[10px] font-bold uppercase tracking-widest opacity-60">Instruction</p>
-                  <p className="font-bold">Toggle translation chat with a hand sign.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* --- STATUS MESSAGE (Below the card where your red line was) --- */}
-        <div className="mt-6 flex items-center gap-3 px-2">
-           <div className="p-2 bg-amber-100 rounded-lg text-amber-700">
-              <Video size={16} />
-           </div>
-           <p>
-  Due to privacy constraints, <span className="font-bold text-gray-700"> the live feed is currently turned off.</span> 
- You can experience real-time detection by cloning the GitHub project and enabling it in your local environment.
-  <a href="https://github.com/BhaveshBhakta/Gesture-AI-Real-Time-Sign-Language-Translation-System.git" className="text-blue-600 hover:underline"> GitHub </a> 
-  and run it locally.
-</p>
-        </div>
-      </div>
-
-      {/* Output Side */}
-      <div className="lg:col-span-5 h-full">
-        <div className="bg-white rounded-3xl border border-gray-200 shadow-xl h-full flex flex-col">
-          <div className="p-8 border-b border-gray-100 flex justify-between items-center">
-            <h4 className="font-bold text-primary flex items-center gap-2">
-              <Languages size={18} strokeWidth={2.5} />
-              Semantic Output
-            </h4>
-            <div className="text-[10px] font-bold text-accent px-3 py-1 bg-accent/10 rounded-full uppercase tracking-widest">
-              High Confidence
-            </div>
-          </div>
-          
-          <div className="flex-1 p-8">
-            <div className="h-full w-full bg-gray-50/50 rounded-2xl border-2 border-dashed border-gray-100 p-8 flex flex-col min-h-[300px]">
-              <textarea 
-                className="w-full flex-1 bg-transparent border-none focus:ring-0 text-3xl font-bold text-primary placeholder:text-gray-300 resize-none font-sans"
-                placeholder="Detected gestures will appear here..."
-                readOnly
-                value={detectedSigns || "Hello, Gesture AI!"}
-              />
-              <div className="mt-8 flex justify-between items-center pt-8 border-t border-gray-100">
-                <div className="flex gap-2">
-                  <button className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs font-bold text-gray-500 transition-colors">Copy Text</button>
+            key="hub" 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.4 }}
+            className="min-h-screen bg-gray-50 pt-32 pb-20"
+          >
+            <div className="max-w-7xl mx-auto px-6 lg:px-12">
+              <header className="mb-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 text-left">
+                <div>
+                  <div className="flex items-center gap-2 text-accent mb-4">
+                    <Activity size={20} />
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Neural Pipeline Online</span>
                   </div>
-                <span className="text-[10px] font-mono text-gray-400 uppercase">
-                  {detectedSigns ? `${detectedSigns.trim().split(/\s+/).length} Words` : "Demo Mode"}
-                </span>
+                  <h1 className="text-3xl lg:text-5xl font-black text-primary tracking-tight">Sign To Text</h1>
+                  <p className="text-gray-500 mt-2 font-medium">Real-time gesture analysis and semantic synthesis.</p>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex items-center gap-3 bg-white px-6 py-3 rounded-full border border-gray-200 shadow-sm">
+                    <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`} />
+                    <span className="text-sm font-bold text-gray-600 font-sans">
+                      {isConnected ? "Connected to Server" : "Static Demo Mode"}
+                    </span>
+                  </div>
+                </div>
+              </header>
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 text-left">
+                {/* Video Feed Side */}
+                <div className="lg:col-span-7">
+                  <div className="bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-2xl relative group">
+                    <div className="aspect-video bg-gray-900 relative">
+                      {/* Technical Overlays */}
+                      <div className="absolute inset-0 pointer-events-none opacity-40 z-10">
+                        <div className="absolute top-8 left-8 w-16 h-16 border-t-2 border-l-2 border-accent" />
+                        <div className="absolute top-8 right-8 w-16 h-16 border-t-2 border-r-2 border-accent" />
+                        <div className="absolute bottom-8 left-8 w-16 h-16 border-b-2 border-l-2 border-accent" />
+                        <div className="absolute bottom-8 right-8 w-16 h-16 border-b-2 border-r-2 border-accent" />
+                      </div>
+
+                      {/* DEVELOPER INSTRUCTIONS:
+                        To use your local Python backend:
+                        1. Uncomment the <img src="http://localhost:5000..." /> block below.
+                        2. Comment out the STATIC DEMO <img /> block below it.
+                      */}
+
+                      {/* --- LIVE FEED BLOCK (Uncomment to use locally) --- */}
+                      {/* <img 
+                        src={isConnected ? "http://localhost:5000/video_feed" : ""} 
+                        className="w-full h-full object-cover" 
+                        alt="Neural Feed" 
+                        onError={() => setIsConnected(false)}
+                      /> 
+                      */}
+
+                      {/* --- STATIC DEMO BLOCK (Comment this out when using Live Feed) --- */}
+                      <img 
+                        src="https://res.cloudinary.com/dsfkxbjrw/image/upload/f_auto,q_auto/v1778653379/example-live_t1engp.png"
+                        className="w-full h-full object-cover grayscale brightness-75"
+                        alt="Neural Feed Demo"
+                      />
+
+                      <div className="absolute top-4 left-5 z-20">
+                        <div className="bg-red-500/90 backdrop-blur px-2 py-1 rounded-lg text-white font-bold text-xs uppercase tracking-widest flex items-center gap-2">
+                          <div className="w-2 h-2 rounded-full bg-white animate-ping" />
+                          Live Hub
+                        </div>
+                      </div>
+
+                      <div className="absolute bottom-8 left-8 right-8 flex justify-between items-center z-20">
+                        <div className="flex gap-2">
+                          <button className="bg-white/10 backdrop-blur hover:bg-white/20 p-3 rounded-xl text-white transition-colors">
+                            <Maximize2 size={20} />
+                          </button>
+                        </div>
+                        <div className="flex gap-4">
+                          <div className="text-white/60 text-[10px] font-mono">FR: 60FPS</div>
+                          <div className="text-white/60 text-[10px] font-mono">LAT: 0.12MS</div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="p-8 bg-primary">
+                      <div className="flex flex-col sm:flex-row items-center justify-between text-white gap-6">
+                        <div className="flex items-center gap-4">
+                          <div className="p-3 bg-accent rounded-xl text-white">
+                            <Cpu size={24} />
+                          </div>
+                          <div className="text-left">
+                            <p className="text-[10px] font-bold uppercase tracking-widest opacity-60">Instruction</p>
+                            <p className="font-bold">Toggle translation chat with a hand sign.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* --- STATUS MESSAGE  --- */}
+                  <div className="mt-6 flex items-center gap-3 px-2">
+                    <div className="p-2 bg-amber-100 rounded-lg text-amber-700">
+                        <Video size={16} />
+                    </div>
+                    <p>
+                      Due to privacy constraints, <span className="font-bold text-gray-700"> the live feed is currently turned off.</span> 
+                    You can experience real-time detection by cloning the GitHub project and enabling it in your local environment.
+                      <a href="https://github.com/BhaveshBhakta/Gesture-AI-Real-Time-Sign-Language-Translation-System.git" className="text-blue-600 hover:underline"> GitHub </a> 
+                      and run it locally.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Output Side */}
+                <div className="lg:col-span-5 h-full">
+                  <div className="bg-white rounded-3xl border border-gray-200 shadow-xl h-full flex flex-col">
+                    <div className="p-8 border-b border-gray-100 flex justify-between items-center">
+                      <h4 className="font-bold text-primary flex items-center gap-2">
+                        <Languages size={18} strokeWidth={2.5} />
+                        Semantic Output
+                      </h4>
+                      <div className="text-[10px] font-bold text-accent px-3 py-1 bg-accent/10 rounded-full uppercase tracking-widest">
+                        High Confidence
+                      </div>
+                    </div>
+                    
+                    <div className="flex-1 p-8">
+                      <div className="h-full w-full bg-gray-50/50 rounded-2xl border-2 border-dashed border-gray-100 p-8 flex flex-col min-h-[300px]">
+                        <textarea 
+                          className="w-full flex-1 bg-transparent border-none focus:ring-0 text-3xl font-bold text-primary placeholder:text-gray-300 resize-none font-sans"
+                          placeholder="Detected gestures will appear here..."
+                          readOnly
+                          value={detectedSigns || "Hello, Gesture AI!"}
+                        />
+                        <div className="mt-8 flex justify-between items-center pt-8 border-t border-gray-100">
+                          <div className="flex gap-2">
+                            <button className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs font-bold text-gray-500 transition-colors">Copy Text</button>
+                            </div>
+                          <span className="text-[10px] font-mono text-gray-400 uppercase">
+                            {detectedSigns ? `${detectedSigns.trim().split(/\s+/).length} Words` : "Demo Mode"}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-8 bg-gray-50 rounded-b-3xl">
+                      <div className="flex items-center gap-4 text-xs font-semibold text-gray-400 uppercase tracking-widest">
+                        <Activity size={14} className="text-green-500" />
+                        System fully operational • 1,662 points active
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className="p-8 bg-gray-50 rounded-b-3xl">
-            <div className="flex items-center gap-4 text-xs font-semibold text-gray-400 uppercase tracking-widest">
-              <Activity size={14} className="text-green-500" />
-              System fully operational • 1,662 points active
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>
